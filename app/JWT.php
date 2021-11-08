@@ -39,9 +39,11 @@ class JWT
     }
 
 
-    public static function verifyToken($token = "") {
+    public static function verifyToken($token = "", $type="Bearer") {
+        // set accetible list;
+        $acceptibleTokens = ["Bearer", "Basic"];
         try {
-            $token = str_replace('Bearer ', '',  $token); 
+            $token = str_replace($type, '',  $token); 
             $decoded = FirebaseJWT::decode($token, self::$secretKey, array('HS512'));
             $decoded_array = (array) $decoded;
 
@@ -62,9 +64,9 @@ class JWT
     }
 
     // Verifies token alongside specified payload
-    public static function verifyTokenPayload($token = "", $payload = []) { 
+    public static function verifyTokenPayload($token = "", $payload = [], $type="Bearer" ) { 
         try {
-            $token = str_replace('Bearer ', '',  $token); 
+            $token = str_replace($type, '',  $token); 
             $decoded = FirebaseJWT::decode($token, self::$secretKey, array('HS512'));
             $decoded_array = (array) $decoded;
 

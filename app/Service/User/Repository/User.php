@@ -1,7 +1,7 @@
 <?php 
 
 namespace App\Service\User\Repository;
-use  App\Dbhandler\Database ; //will be injected
+use  App\Dbhandler\Database ; 
 
 class User
 {
@@ -9,7 +9,7 @@ class User
     private $data;
 
     public function __construct() {
-          $this->db = Database::getInstance();
+         $this->db = (new Database)->setDB();
     }
 
     public function findAll(){

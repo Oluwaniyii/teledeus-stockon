@@ -8,7 +8,6 @@ use PDO;
 
 class Database 
 {
-    public static $_instance ;
     protected $_dbh ;
     private $_query ;
     private $_count ;
@@ -16,35 +15,27 @@ class Database
     private $_logger ;
     private $_results ;
 
-    private function __construct() {
-     try {
-        $config = require __DIR__ . '/../../config/db.php' ;
-        $host = $config['host'];
-        $dbname = $config['dbname'];
-        $username = $config['user'];
-        $password = $config['password'];
-        $dsn = "mysql:hostname=$host;dbname=$dbname;";
-        $options = [
-            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
-        ];
+    public function setDB($configPath = null) {
+        try {
+            $config = require !is_null($configPath) ? $configPath : __DIR__ . '/../../config/db.php' ;
+            $host = $config['host'];
+            $dbname = $config['dbname'];
+            $username = $config['user'];
+            $password = $config['password'];
+            $dsn = "mysql:hostname=$host;dbname=$dbname;";
+            $options = [
+                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
+            ];
 
-        $this->_dbh = new PDO($dsn, $username, $password);
-    }
-        catch(PDOException $ex) {
-            die($ex->getMessage);
+            $this->_dbh = new PDO($dsn, $username, $password);
         }
-    }
+            catch(PDOException $ex) {
+                die($ex->getMessage);
+        }
 
-   public static function getInstance(){
-       if(self::$_instance) {
-           return self::$_instance ;
-       }
-       else {
-         self::$_instance = new Database();
-        return self::$_instance ;
-       }
-   }
+        return $this;
+    }
 
     public function query($sql, $params = []){
         $this->_query = $this->_dbh->prepare($sql);

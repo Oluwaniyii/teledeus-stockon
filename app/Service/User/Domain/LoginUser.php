@@ -45,4 +45,3 @@ class LoginUser {
         return Responder::respondSuccess($data);
     }
 }
-

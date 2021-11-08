@@ -1,55 +1,15 @@
 <?php
 
-declare(strict_types=1);
+// clientAuth server 
 
-use App\Http\Responder ;
-use App\Library\Validator ;
+// send auth request 
+// client_id = r3r34r3
+// client_secret  = fuerhfhee
 
-if(!user.exist()) {
-    respondWithError(404, "User Not Found");
-}
-else {
-    if(!updateUser($userData)) {
-        respondWithError(500, "Could not Update user at the moment");
-    }
-    else {
-        respondWithSuccess(200,  "User Updates");
-    }
-};
+// verify
 
+// return token with token details
 
-// Validaator
-Validator::validate($request->requestBody(), [
-  "name" => [
-      "name" => "Username",
-      "required" => true,
-      "max-length" => 21,
-      "min-length" => 6,
-  ],
-  "password" => [
-     "name" => "Password",
-      "required" => true,
-      "match-case" => '/[a-zA-Z\W]+/',
-      "min-length" => 6,
-   ],
-  ]);
+// verify client server
+//         return token
 
-
-  function updateUser($userData){
-      if((!Validator::validate($userData))->status()){
-           return Validator;
-      }
-      return true ;
-  }
-
-  UserController::getUser() ;
-
-//   getUsers($request, $response) {
-//       // Grab necessary Data : id
-//       // Include Domain with Data : id
-//       // get response 
-//       // return response
-//   }
-
-//   public function getUser(Request $request, Response $response, $id=null) {
-//              return App\Service\User\Domain\getUser($request, $response) }
