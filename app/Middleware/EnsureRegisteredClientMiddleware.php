@@ -37,7 +37,7 @@ class EnsureRegisteredClientMiddleware {
     return JWT::verifyToken($token);
     }
 
-    private function respond401(){
+    private function respond403(){
     $response = new Response ;
     $response->getBody()->write("Forbidden");
     return $response->withStatus(403)

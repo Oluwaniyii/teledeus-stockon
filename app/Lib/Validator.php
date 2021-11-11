@@ -14,7 +14,6 @@ class Validator {
         self::$isValidated = true;
         self::$errorMessage = [];
 
-    //    echo count($schema);
        foreach($schemas as $inputkey =>  $inputSchema) {
            $inputValue = $requestInput[$inputkey] ;
            $inputName = $inputSchema['name'];
@@ -79,9 +78,4 @@ class Validator {
    public static function errorrs() {
        return self::$errorMessage;
    } 
-
-   /**
-    * test cases
-    * one to many, none to +, one to one many to many
-    */
 }

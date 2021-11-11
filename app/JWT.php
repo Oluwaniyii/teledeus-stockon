@@ -22,7 +22,7 @@ class JWT
       $payload['iat'] = time();
       $payload['iss'] = self::$iss;
       $payload['nbf'] = time();
-      $payload['exp'] = time() + (60*60);
+      $payload['exp'] = time() + (60*60*12);
 
       # Extract Data
       foreach ( $data as $key => $value ) {
@@ -43,7 +43,7 @@ class JWT
         // set accetible list;
         $acceptibleTokens = ["Bearer", "Basic"];
         try {
-            $token = str_replace($type, '',  $token); 
+            $token = str_replace("$type ", '',  $token); 
             $decoded = FirebaseJWT::decode($token, self::$secretKey, array('HS512'));
             $decoded_array = (array) $decoded;
 
@@ -58,7 +58,6 @@ class JWT
             return true ;
 
         } catch(\Exception $ex) {
-            // echo $ex->getMessage();
            return false ;
         }
     }
@@ -66,7 +65,7 @@ class JWT
     // Verifies token alongside specified payload
     public static function verifyTokenPayload($token = "", $payload = [], $type="Bearer" ) { 
         try {
-            $token = str_replace($type, '',  $token); 
+            $token = str_replace("$type ", '',  $token); 
             $decoded = FirebaseJWT::decode($token, self::$secretKey, array('HS512'));
             $decoded_array = (array) $decoded;
 

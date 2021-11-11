@@ -29,8 +29,8 @@ return function (App $app)
             ->withHeader('Content-Type', 'application/json');
         });
     
-        $app->get("/users", [UserController::class, 'get']); // Enable safe mode
-        $app->get("/users/{id}", [UserController::class, 'view'])->add(EnsureAuthenticatedMiddleware::class);
+        $app->get("/users", [UserController::class, 'get']);
+        $app->get("/users/{id}", [UserController::class, 'view']); // ->add(EnsureAuthenticatedMiddleware::class);
         $app->post("/users", [UserController::class, 'add']);
         $app->put("/users/{id}", [UserController::class, 'update'])->add(EnsureAuthenticatedMiddleware::class);
         $app->delete("/users/{id}", [UserController::class, 'remove'])->add(EnsureAuthenticatedMiddleware::class);
