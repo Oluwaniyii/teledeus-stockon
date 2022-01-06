@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teledeus Authorize</title>
+    <style>
+        body {
+            /* font-family: Arial, Helvetica, sans-serif; */
+            width: 100vw;
+            height: 100vh;
+            font-family: calibri, tahoma, "ms outlook";
+        }
+
+        .container {
+            display: block;
+            /* width: 1024px; */
+            /* max-width: 100%; */
+            border: 1px solid rgba(225, 220, 220, 0.585);
+            margin: auto;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .button {
+            display: inline-block;
+            width: 150px;
+            padding: 7px;
+            border: 2px solid;
+            text-decoration: none;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .button#grant-acces-button {
+            border-color: rgb(76, 158, 245);
+            background-color: rgb(0, 123, 255);
+            color: #fff;
+        }
+
+        .button#deny-access-button {
+            border-color: #ccc;
+            background-color: rgb(235, 232, 232);
+            color: #333;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h5>Teledeus Stockon</h5>
+
+        <h2>
+            <span style="font-family:  'ms outlook';">
+                A
+            </span>
+            Teledeus Airtime Purchase
+        </h2>
+
+        <h2>
+            <small style="font-weight: 300;">
+                This App wants to access your profile
+            </small>
+        </h2>
+        <form action="/oauth/authorize" method="post">
+            <button type="submit" class="button" id="deny-access-button" name="access" value="deny">Deny Access</button>
+            <button type="submit" class="button" id="grant-acces-button" name="access" value="allow">Allow
+                Access</button>
+        </form>
+
+    </div>
+</body>
+
+</html>

@@ -111,7 +111,6 @@ class Database
 			    	implode("`, `", $fields) .
                  "`) 
                  VALUES ({$values})";
-
                 $this->query($sql, $data) ;
 		}
       

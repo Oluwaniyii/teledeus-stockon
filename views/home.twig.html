@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teledeus Dashboard</title>
+    <style>
+        header {
+            padding: .7rem;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .logout-button {
+            display: inline-block;
+            width: 150px;
+            padding: 7px;
+            border: 1px solid rgb(0, 123, 255);
+            color: rgb(0, 123, 255);
+            text-decoration: none;
+        }
+
+        a {
+            font-size: 15px;
+            color: rgb(68, 174, 255);
+        }
+
+        .contain {
+            padding-top: 3rem;
+            width: 1024px;
+            max-width: 100%;
+            margin: auto;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+
+    </header>
+    <div class="contain">
+        <h5>Teledeus Stockonc</h5>
+        <br>
+        <h2>
+            Welcome Back
+        </h2>
+        <h1>
+            <small style="font-weight: 100;">
+                {{username}}
+            </small>
+        </h1>
+
+        <a class="" href="/profile">my profile</a> | <a class="" href="/profile/settings">settings</a>
+
+        <br>
+        <a href="/auth/logout">logout</a>
+    </div>
+
+</body>
+
+</html>

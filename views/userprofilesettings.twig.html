@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile settings | Tempestad</title>
+</head>
+
+<style>
+    root {
+        --primary: rgb(153, 191, 191);
+        --blue: #007bff;
+    }
+
+    .contain {
+        width: 1024px;
+        max-width: 100%;
+        margin: auto;
+    }
+
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        font-family: calibri, tahoma, "ms outlook";
+        font-weight: 400;
+    }
+
+    body {
+        padding: 1rem;
+    }
+
+    a {
+        display: inline-block;
+        color: var(--blue);
+        color: rgb(96, 162, 234);
+        font-weight: bold;
+    }
+
+    div.contain {
+        /* background: red; */
+        width: 1024px;
+        max-width: 100%;
+        margin: auto;
+        padding: 0 2rem;
+    }
+
+    section#myapps {
+        /* background: #000; */
+        padding-top: 4rem;
+    }
+
+    Section#myapps .heading {
+        color: var(--primary);
+        color: rgba(60, 60, 60, 0.797);
+        font-weight: 600;
+    }
+
+    Section#myapps #new-app {
+        display: block;
+        width: fit-content;
+        margin-left: auto;
+        padding: 5px;
+        border: 1px solid rgba(158, 165, 165, 0.187);
+        border-radius: 4px;
+        color: rgb(153, 191, 191);
+        color: rgb(136, 176, 176);
+        color: rgb(0, 123, 255);
+        font-size: 13px;
+        font-weight: 100;
+
+    }
+
+    div.app {
+        padding: 1rem;
+        margin: 20px 0;
+        border: 1px solid rgba(143, 187, 234, 0.278);
+        border-radius: 7px;
+        cursor: pointer;
+        position: relative;
+        width: 600px;
+        max-width: 100%;
+
+    }
+
+    div.app>* {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        font-weight: 300 !important;
+        color: rgb(149, 178, 210);
+
+    }
+
+    div.app:hover>* {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        font-weight: 300 !important;
+        color: rgb(157, 198, 243);
+    }
+
+
+    div.app-container div.app::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        right: 16px;
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        transform: translateY(-50%);
+        transform: translateX(-16px);
+        background: linear-gradient(to top,
+                rgba(172, 170, 170, 0.222),
+                rgba(155, 153, 153, 0.448));
+        /* background: rgb(17, 244, 164); */
+    }
+
+    div.app-container:hover div.app::after {
+        content: '';
+        content: '';
+        position: absolute;
+        top: 50%;
+        right: 16px;
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        transform: translateY(-50%);
+        transform: translateX(-16px);
+        background: linear-gradient(to top,
+                rgb(157, 198, 243), rgb(96, 162, 234));
+    }
+
+    a.revoke {
+        display: block;
+        width: 200px;
+        text-align: center;
+        font-size: .8rem;
+
+        padding: 10px;
+        border: 1px solid rgba(158, 165, 165, 0.187);
+        border-radius: 4px;
+        color: rgb(153, 191, 191);
+        color: rgb(136, 176, 176);
+        color: rgb(0, 123, 255);
+        text-decoration: none;
+        font-weight: 600;
+    }
+</style>
+
+
+<body>
+    <div class="contain">
+
+        <!-- My Apps -->
+        <section id="myapps">
+            <a href="/">Back to home</a> | <a href="/profile">Profile</a>
+
+            <br>
+            <br>
+            <br>
+            <h3 class="heading">Apps Connected to My Account</h3>
+
+            <div class="app-container">
+                {% if apps %}
+
+                {% for app in apps %}
+                <div class="app">
+                    <h2 class="apptitle">{{app['app_name']}}</h2>
+                    <div><small>{{app['created']}}</small></div>
+                </div>
+                <a href="/oauth/revokeaccess/{{app['client_id']}}" class="revoke">Revoke Access</a>
+                {% endfor %}
+
+                {% else %}
+                <div style="margin-top: 2rem; font-size: 1.2rem; font-weight: 100;">
+                    <h3>
+                        No app Is Currently connected with your Account
+                    </h3>
+                </div>
+                <br>
+                <div style="text-align: left;">
+                    <a href="/"> Homepage </a> | <a href="/profile">Profile</a>
+                </div>
+                {% endif %}
+            </div>
+        </section>
+    </div>
+
+</body>
+
+</html>

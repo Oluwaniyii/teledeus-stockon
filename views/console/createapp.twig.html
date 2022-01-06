@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Developer Dashboard | Tempestad</title>
+</head>
+
+<style>
+    root {
+        --primary: rgb(153, 191, 191);
+        --blue: #007bff;
+    }
+
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        font-family: calibri, tahoma, "ms outlook";
+        font-weight: 400;
+    }
+
+    header div#showcase {
+        display: block;
+        background: rgba(35, 36, 36, 0.776);
+        background: linear-gradient(to bottom, rgba(53, 55, 55, 0.776), rgba(32, 33, 33, 0.776));
+        padding: 2rem;
+        color: #fff;
+        font-weight: bold;
+    }
+
+    header nav {
+        display: block;
+        padding: .5rem 2em;
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 1px solid rgba(204, 204, 204, 0.468);
+    }
+
+    a {
+        display: inline-block;
+        text-decoration: none;
+        color: var(--blue);
+        color: rgb(153, 191, 191);
+    }
+
+    div.contain {
+        /* background: red; */
+        width: 600px;
+        max-width: 100%;
+        margin: auto;
+        padding: 0 2rem;
+    }
+
+    section#create-new-app {
+        /* background: #000; */
+        padding-top: 4rem;
+    }
+
+    Section#myapps .heading {
+        color: var(--primary);
+        color: rgba(60, 60, 60, 0.797);
+        font-weight: 600;
+    }
+
+    div.input-group {
+        margin-bottom: 15px;
+    }
+
+    div.input-group label {
+        display: block;
+        font-size: 12px;
+        font-weight: bold;
+        margin-bottom: 4px;
+    }
+
+    div.input-group small {}
+
+
+    div.input-group input,
+    div.input-group textarea {
+        margin: 3px 0;
+        width: 600px;
+        max-width: 100%;
+        padding: 7px;
+        border: 1px solid rgba(158, 165, 165, 0.187);
+        border-radius: 4px;
+
+    }
+
+    div.input-group-radio {
+        /* width: 500px; */
+        padding: .7rem;
+        border: none;
+        border: 1px solid rgba(204, 204, 204, 0.4);
+        margin-top: 5px;
+        margin-bottom: 20px;
+    }
+
+    div.input-group-radio>input[type=radio] {
+        -webkit-appearance: none;
+        appearance: none;
+        border: none;
+        font: inherit;
+        width: 20px !important;
+        height: 20px;
+        border: 0.15em solid rgba(74, 74, 74, 0.379);
+        position: relative;
+    }
+
+    div.input-group-radio>input[type=radio]::after {
+        content: "";
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+    }
+
+    div.input-group-radio>input[type=radio]:checked::after {
+        background: linear-gradient(to top, rgb(103, 165, 165),
+                rgb(83, 114, 114));
+    }
+
+
+
+    div.input-group-radio>label {
+        display: block;
+        margin-top: 3px;
+        font-size: 14px;
+        color: rgba(0, 0, 0, 0.735);
+    }
+
+
+
+    input[type=submit] {
+        background: rgb(69, 120, 120);
+        border: 1px solid rgb(42, 108, 108);
+        border-radius: 4px;
+        color: #fff;
+        padding: 5px;
+        font-size: 17px;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        font-weight: 100;
+    }
+</style>
+
+
+<body>
+    <header>
+        <div id="showcase">
+            <div id=logo>
+                <h2> T. <small>Developer Hub</small></h2>
+            </div>
+        </div>
+    </header>
+
+    <!-- My Apps -->
+    <section id="create-new-app">
+        <div class="contain">
+            <h2>
+                Create App
+            </h2>
+            <br>
+            <form action="/developer/app/create" method="POST">
+                <h3 style="color: rgb(245, 76, 76);">{{error_message}}</h3>
+                <br>
+                <div class="input-group">
+                    <label for="">App Name</label>
+                    <input type="text" name="app_name">
+                </div>
+
+                <div class="input-group">
+                    <label for="">App Description</label>
+                    <textarea rows="10" cols="10" name="app_description"></textarea>
+                </div>
+
+                <h5 style="font-weight: bold;">App Type</h5>
+                <!--  -->
+                <div class="input-group-radio">
+                    <input type="radio" name="app_type" value="authorization_code_grant">
+                    <br>
+                    <br>
+                    <h5 style="font-weight: bold;">Server Apps</h5>
+                    <label for="">
+                        Backend apps that run on the server
+                        <br>
+                        Website, web Applications, Node Js Apps, Java SE, Php apps etc.
+                    </label>
+                </div>
+                <!--  -->
+
+                <div class="input-group-radio">
+                    <input type="radio" name="app_type" value="pkce" disabled>
+                    <br>
+                    <br>
+                    <h5 style="font-weight: bold;">Native, Single Page and Mobile Apps</h5>
+
+                    <label for="">
+                        Android & Ios Applications, React, React Native, Vue and Flutter apps,
+                        Angular apps with No backend
+                        <br>
+                        <br>
+                        <span style="font-weight: bold;">
+                            This type of app is NOT supported yet.
+                        </span>
+                    </label>
+                </div>
+                <br>
+                <br>
+
+                <h5 style="font-weight: bold;">Client URLs</h5>
+                <br>
+                <br>
+
+                <div class="input-group">
+                    <label for="">Success Redirect Url</label>
+                    <div>
+                        <small>
+                            This is where users will be redirect after successful authentication
+                            <br>learn more at <a href="https://oauth.com">oauth.com</a>
+                        </small>
+                    </div>
+                    <input type="url" name="success_redirect_url">
+                </div>
+
+                <div class="input-group">
+                    <label for="">Error Redirect Url</label>
+                    <div>
+                        <small>
+                            If you want to handle both success and error on the same url, you can skip this input
+                        </small>
+                    </div>
+                    <input type="url" name="error_redirect_url">
+                </div>
+
+                <input type="submit" value="Create App">
+            </form>
+        </div>
+
+    </section>
+
+</body>
+
+</html>

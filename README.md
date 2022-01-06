@@ -1,65 +1,45 @@
-Still need to make heavy changes refactor seprate credentials
-
-coming feature
-api third party registeration
-authentication
-
-to run app
-cd into base folder
-
-Import Database
-import databse from database/users.sql
-
-run
--composer install
--php -S localhost:800 -t public
-
-send requests to localhost
-
-There Is A Bug With Trailing Slashes
-
-GET users 
-/users
-
-single user
-/user/id
-
-POST users
-/users
+<!-- 
+PAGINATION 
+ -->
 
 
-DELETE users
-/users/id
+<!-- Getting Started -->
+# Teledeus Oauth Service
 
-form format 
-{
-            "username": "Tom Felton",
-            "password": "12345678`",
-            "email": "tommy@gmail.com",
-            "phone": "+234-111-222-3334",
-            "address_building": "39,B5",
-            "address_city": "gowon, isolo ",
-            "address_state": "Lagos",
-            "address_zipcode": "10011"
-}
+## Getting Started
 
-Authentication
+To use the oauth server, you need have a developer account first
 
-Using postman :
-    send email and password to authentication route
-    {
-        "username": "Tom Felton",
-        "password": "12345678`",
-    }
+1 head on to  [**remote website**](https://tldstockon.herokuapp.com/developer) login into your developer account
+after a successful login , you will be taken to your dashboard where you can create an applicion
 
-    A token will be sent back
-        -grab token and remove quotation marks
-        -navigate to authorization on postman
-        -click the dropdown and select bearer;
-        -paste token 
+2 On the top right side click new app from the form select an app type
 
-    send request to access protected routes, Voila!
+**The information to be provided for app creation**
+**The app name**  The name of your app
+**App description**  What your app does in a nutshell
+**App type** This is essential for the selecting the authorization type suitable for your application, only server side apps are supported for now.
+
+**Client and error redirect urls** This is where users will be redirected to after authentication request, if you will be handling both error and success on the same page then you can omit the error redirect space
+
+## client ID and Secret
+After creationg your server side app, you get a **client id** and **client secret** code, be sure to keep this code safe and secured as they  are essential to accessing your application.
+
+The client id is a random 32 string
+while the client secret is a 64-string-long code
+
+# User Authorization: authorization code grant
 
 
+<!-- subheading -->
+<!--  -->
 
+ <!-- Obtaining Token Code -->
 
+ <!-- Access Token Request -->
+
+ <!-- Pulling User Data -->
+
+ <!-- User revoking Access -->
+
+ <!-- Client credentials change -->

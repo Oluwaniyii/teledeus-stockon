@@ -1,6 +1,7 @@
 <?php 
 
-namespace App\Service\User\Repository;
+namespace App\Service\OAuth\Repository;
+
 use  App\Dbhandler\Database ; 
 
 class User
@@ -24,15 +25,13 @@ class User
     public function findById($id){
         $sql = "SELECT unique_id, username, email,
                                     phone, address_building, address_city, address_building,
-                                    address_state, address_zipcode, joined
+                                    address_zipcode, joined
                     FROM users
                     WHERE unique_id = :unique_id ";
 
         $params = ["unique_id"=>$id];
 
-        $result = ($this->db->query($sql, $params))->results();
-
-        return empty($result) ? [] : $result[0];
+        return ($this->db->query($sql, $params))->results();
     }
 
     public function findByEmail($email){
@@ -43,18 +42,6 @@ class User
                     WHERE email = :email";
 
        $params = ["email"=>$email];
-
-        return ($this->db->query($sql, $params))->first();
-    }
-
-    public function findByUsername($username){
-        $sql = "SELECT unique_id, username, email,
-                                    phone, address_building, address_city, address_building,
-                                    address_zipcode, joined
-                    FROM users
-                    WHERE username = :username";
-
-       $params = ["username"=>$username];
 
         return ($this->db->query($sql, $params))->first();
     }

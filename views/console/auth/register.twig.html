@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Developer Dashboard | Tempestad</title>
+</head>
+
+<style>
+    root {
+        --primary: rgb(153, 191, 191);
+        --blue: #007bff;
+    }
+
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        font-family: calibri, tahoma, "ms outlook";
+        font-weight: 400;
+    }
+
+    header div#showcase {
+        display: block;
+        background: rgba(35, 36, 36, 0.776);
+        background: linear-gradient(to bottom, rgba(53, 55, 55, 0.776), rgba(32, 33, 33, 0.776));
+        padding: 1rem;
+        color: #fff;
+        font-weight: bold;
+    }
+
+    header nav {
+        display: block;
+        padding: .5rem 2em;
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 1px solid rgba(204, 204, 204, 0.468);
+    }
+
+    a {
+        display: inline-block;
+        text-decoration: none;
+        color: var(--blue);
+        color: rgb(153, 191, 191);
+    }
+
+    div.contain {
+        /* background: red; */
+        width: 1024px;
+        max-width: 100%;
+        margin: auto;
+        padding: 0 2rem;
+    }
+
+    section#create-new-app {
+        /* background: #000; */
+        padding-top: 4rem;
+    }
+
+    Section#myapps .heading {
+        color: var(--primary);
+        color: rgba(60, 60, 60, 0.797);
+        font-weight: 600;
+    }
+
+    div.input-group {
+        margin-bottom: 15px;
+    }
+
+    div.input-group label {
+        display: block;
+        font-size: 12px;
+        font-weight: bold;
+        margin-bottom: 4px;
+    }
+
+    div.input-group input {
+        width: 400px;
+        max-width: 100%;
+        padding: 7px;
+        border: 1px solid rgba(158, 165, 165, 0.187);
+        border-radius: 4px;
+
+    }
+
+    div.input-group-radio {
+        width: 400px;
+        padding: 1.1rem;
+        border: none;
+        border: 1px solid rgba(204, 204, 204, 0.4);
+        margin-bottom: 10px;
+    }
+
+    div.input-group-radio>input[type=radio] {
+        -webkit-appearance: none;
+        appearance: none;
+        border: none;
+        font: inherit;
+        width: 20px !important;
+        height: 20px;
+        border: 0.15em solid rgba(74, 74, 74, 0.379);
+        position: relative;
+    }
+
+    div.input-group-radio>input[type=radio]::after {
+        content: "";
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+    }
+
+    div.input-group-radio>input[type=radio]:checked::after {
+        background: linear-gradient(to top, rgb(103, 165, 165),
+                rgb(83, 114, 114));
+    }
+
+
+
+    div.input-group-radio>input[type=radio]+label {
+        display: block;
+        margin-top: 3px;
+        font-size: 14px;
+        line-height: 14px;
+        line-height: 1.1;
+        color: rgba(0, 0, 0, 0.735);
+    }
+
+
+
+    input[type=submit] {
+        background: rgb(69, 120, 120);
+        border: 1px solid rgb(42, 108, 108);
+        border-radius: 4px;
+        color: #fff;
+        padding: 5px;
+        font-size: 17px;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        font-weight: 100;
+    }
+</style>
+
+
+<body>
+    <header>
+        <nav>
+            <small>
+                T. Developer Console
+            </small>
+        </nav>
+
+    </header>
+
+    <!-- My Apps -->
+    <section id="create-new-app">
+        <div class="contain">
+            <h2>Register to get Developer Account</h2>
+            <small>
+                Great talents find happiness in execution
+            </small>
+            <br> <br>
+
+            <h5 style="color: rgb(234, 90, 90);">
+                {{error_message}}
+            </h5>
+            <br>
+
+            <form action="/developer/auth/register" method="POST">
+
+                <div class="input-group">
+                    <label for="firstname">Firstname</label>
+                    <input id="firstname" type="text" name="firstname" placeholder="John">
+                </div>
+
+                <div class="input-group">
+                    <label for="lastname">Lastname</label>
+                    <input id="lastname" type="text" name="lastname" placeholder="Doe">
+                </div>
+
+                <div class="input-group">
+                    <label for="email">Email</label>
+                    <input id="email" type="text" name="email" placeholder="name@example.com">
+                </div>
+
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input id="password" type="password" name="password">
+                </div>
+
+                <div class="input-group">
+                    <label for="confirm_password">Confirm Password</label>
+                    <input id="confirm_password" type="password" name="confirm_password">
+                </div>
+
+                <input type="submit" value="Create">
+            </form>
+
+            <br>
+            <a href="/developer/auth/login">
+                <small>
+                    Already have an account? Login
+                </small>
+            </a>
+        </div>
+
+    </section>
+
+</body>
+
+</html>

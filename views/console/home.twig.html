@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Developer Dashboard | Tempestad</title>
+</head>
+
+<style>
+    root {
+        --primary: rgb(153, 191, 191);
+        --blue: #007bff;
+    }
+
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        font-family: calibri, tahoma, "ms outlook";
+        font-weight: 400;
+    }
+
+    header div#showcase {
+        display: block;
+        background: rgba(35, 36, 36, 0.776);
+        background: linear-gradient(to bottom, rgba(53, 55, 55, 0.776), rgba(32, 33, 33, 0.776));
+        padding: 2rem;
+        color: #fff;
+        font-weight: bold;
+    }
+
+    header nav {
+        display: block;
+        padding: .5rem 2em;
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 1px solid rgba(204, 204, 204, 0.468);
+    }
+
+    a {
+        display: inline-block;
+        text-decoration: none;
+        color: var(--blue);
+        color: rgb(153, 191, 191);
+    }
+
+    div.contain {
+        /* background: red; */
+        width: 1024px;
+        max-width: 100%;
+        margin: auto;
+        padding: 0 2rem;
+    }
+
+    section#myapps {
+        /* background: #000; */
+        padding-top: 4rem;
+    }
+
+    Section#myapps .heading {
+        color: var(--primary);
+        color: rgba(60, 60, 60, 0.797);
+        font-weight: 600;
+    }
+
+    Section#myapps #new-app {
+        display: block;
+        width: fit-content;
+        margin-left: auto;
+        padding: 5px;
+        border: 1px solid rgba(158, 165, 165, 0.187);
+        border-radius: 4px;
+        color: rgb(153, 191, 191);
+        color: rgb(136, 176, 176);
+        font-size: 13px;
+        font-weight: 100;
+
+    }
+
+    div.app {
+        padding: 1rem;
+        margin: 20px 0;
+        border: 1px solid rgba(153, 191, 191, 0.167);
+        border-radius: 7px;
+        cursor: pointer;
+        position: relative;
+
+    }
+
+    div.app>* {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        font-weight: 300 !important;
+        color: rgb(83, 106, 106);
+
+    }
+
+    div.app:hover>* {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        font-weight: 300 !important;
+        color: rgb(136, 176, 176);
+    }
+
+
+    div.app::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        right: 16px;
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        transform: translateY(-50%);
+        transform: translateX(-16px);
+        background: linear-gradient(to top,
+                rgba(172, 170, 170, 0.222),
+                rgba(155, 153, 153, 0.448));
+        /* background: rgb(17, 244, 164); */
+    }
+
+    div.app:hover::after {
+        content: '';
+        content: '';
+        position: absolute;
+        top: 50%;
+        right: 16px;
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        transform: translateY(-50%);
+        transform: translateX(-16px);
+        background: linear-gradient(to top,
+                rgb(121, 198, 174), rgb(12, 247, 173));
+    }
+</style>
+
+<!-- id
+unique_id	
+firstname
+lastname
+email
+password -->
+
+<body>
+    <header>
+        <div id="showcase">
+            <div id=logo>
+                <h2> T. <small>Developer Hub</small></h2>
+            </div>
+        </div>
+
+        <!-- Nav -->
+        <nav>
+            <div style="font-weight:500;">{{user['firstname']}}</div>
+
+            <a href="/developer/auth/logout">Logout</a>
+        </nav>
+    </header>
+
+    <!-- My Apps -->
+    <section id="myapps">
+        <div class="contain">
+            <h3 class="heading">My Applications
+                <span class="badge">{{appsCount}}</span>
+            </h3>
+            <a href="/developer/app/create" id="new-app">New App</a>
+
+            {% if appsCount %}
+            {% for app in apps %}
+            <div class="app">
+                <a href="/developer/app/view?app_id={{app['unique_id']}}">
+                    <h2 class="apptitle">{{app['app_name']}}</h2>
+                    <div><small>{{app['created']}}2</small></div>
+                </a>
+            </div>
+
+            {% endfor %}
+            {% else %}
+            <div style="margin-top: 2rem; font-size: 1.2rem; font-weight: 100;">
+                <h3>You Have no apps yet</h3>
+                <br>
+                <a href="/developer/app/create">
+                    <small>
+                        Register a new app
+                    </small>
+                </a>
+            </div>
+            <br>
+            {% endif %}
+        </div>
+
+        </div>
+    </section>
+
+    {% if flashMessage %}
+    <script>
+        alert("{{flashMessage}}");
+    </script>
+    {% endif %}
+</body>
+
+</html>

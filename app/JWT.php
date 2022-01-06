@@ -16,13 +16,13 @@ class JWT
     private static $nbf ;
     private static $exp ;
 
-    public static function generateToken($data=[])
+    public static function generateToken($data=[], $time=null)
     {
       $payload = [];
       $payload['iat'] = time();
       $payload['iss'] = self::$iss;
       $payload['nbf'] = time();
-      $payload['exp'] = time() + (60*60*12);
+      $payload['exp'] = time() + ( $time ? $time :  (60*60*12) );
 
       # Extract Data
       foreach ( $data as $key => $value ) {
@@ -39,11 +39,8 @@ class JWT
     }
 
 
-    public static function verifyToken($token = "", $type="Bearer") {
-        // set accetible list;
-        $acceptibleTokens = ["Bearer", "Basic"];
+    public static function verifyToken($token = "") {
         try {
-            $token = str_replace("$type ", '',  $token); 
             $decoded = FirebaseJWT::decode($token, self::$secretKey, array('HS512'));
             $decoded_array = (array) $decoded;
 
@@ -63,9 +60,8 @@ class JWT
     }
 
     // Verifies token alongside specified payload
-    public static function verifyTokenPayload($token = "", $payload = [], $type="Bearer" ) { 
+    public static function verifyTokenPayload($token = "", $payload = []) { 
         try {
-            $token = str_replace("$type ", '',  $token); 
             $decoded = FirebaseJWT::decode($token, self::$secretKey, array('HS512'));
             $decoded_array = (array) $decoded;
 

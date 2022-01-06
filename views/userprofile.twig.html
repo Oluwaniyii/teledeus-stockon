@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teledeus Sign in</title>
+
+    <style>
+        body {
+            padding: 2rem;
+        }
+
+        .contain {
+            width: 1024px;
+            max-width: 100%;
+            margin: auto;
+        }
+
+        form {
+            display: block;
+            width: 1020px;
+            margin: auto;
+            padding-top: 1rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 7px;
+        }
+
+        input {
+            width: 350px;
+            border: 1px solid rgba(144, 148, 150, 0.174);
+            border-radius: 4px;
+            padding: 9px;
+            font-weight: 300;
+            font-size: 15px;
+            color: rgba(51, 51, 51, 0.831);
+        }
+
+        input[type=submit] {
+            width: fit-content;
+            background: rgb(126, 170, 222);
+            color: #fff;
+            font-weight: bold;
+        }
+
+        a {
+            font-size: 15px;
+            color: rgb(68, 174, 255);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="contain">
+        <h2>
+            {{user['username']}} Profile
+        </h2>
+
+        <h5>
+            <a href="/">Back To Home</a>
+            <h5>
+                {{error_message}}
+            </h5>
+        </h5>
+
+        <form action="http://localhost:9000/profile" method="POST">
+            <h5>
+                Edit and Save changes
+            </h5>
+
+            <label for="">Username</label>
+            <input type="text" name="username" value="{{user['username']}}" placeholder="tempest456">
+            <br /><br />
+
+            <label for="">Email</label>
+            <input type="text" name="email" value="{{user['email']}}" placeholder="email@example.com">
+            <br /><br />
+
+            <label for="">Phone</label>
+            <input type="text" name="phone" value="{{user['phone']}}" placeholder="09074237582">
+            <br /><br />
+
+            <!-- ADDRESS -->
+            <label for="" style="font-style: italic; font-weight: bold !important;">Address</label>
+
+            <label for="">Building</label>
+            <input type="text" name="address_building" value="{{user['address_building']}}" placeholder="13, Oluwaseyi">
+            <br /><br />
+
+            <label for="">City</label>
+            <input type="text" name="address_city" value="{{user['address_city']}}" placeholder="iyana-ipaja">
+            <br /><br />
+
+            <label for="">State</label>
+            <input type="text" name="address_state" value="{{user['address_state']}}" placeholder="Lagos">
+            <br /><br />
+
+            <label for="">Zip</label>
+            <input type="text" name="address_zipcode" value="{{user['address_zipcode']}}" placeholder="11111">
+
+            <br /><br />
+            <input type="submit" value="Save Changes">
+        </form>
+        <br>
+        <br>
+    </div>
+
+    <!-- Body Close -->
+</body>
+<script>
+</script>
+
+</html>

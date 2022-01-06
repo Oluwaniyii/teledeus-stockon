@@ -1,46 +1,56 @@
 <?php 
 
 use Slim\App ;
-use App\Service\Auth\ClientAuthController ;
-use App\Service\User\UserController ;
-use App\Middleware\EnsureAuthenticatedMiddleware;
-use App\Middleware\EnsureRegisteredClientMiddleware;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\OAuthController;
+use App\Http\Controllers\PagesController;
+use App\Http\Controllers\DeveloperController;
+use App\Http\Controllers\APIController;
+use App\Middleware\EnsureAuthenticatedClientMiddleware;
+use App\Middleware\EnsureAuthenticatedUserMiddleware;
 use Psr\Http\Server\RequestHandlerInterface as RequestHandler;
-use Psr\Http\Message\ServerRequestInterface as Request ;
-use Psr\Http\Message\ResponseInterface as Response ;
+use Psr\Http\Message\ServerRequestInterface as Request;
+use Psr\Http\Message\ResponseInterface as Response;
+use App\Http\Responder;
 
 
 return function (App $app)
 {
+    $app->get("/", [PagesController::class, 'home']);
 
-    $app->group(
-    '',
-    function() use ($app) {
-        
-        $app->get("/", function(Request $request, Response $response){
-            $response->getBody()->write(json_encode(
-                [
-                    "status" => "success",
-                    "message" => "Welcome to Teledeus Ecommerce Api",
-                    "documentation" => "http://inthemaking.com",
-                ]
-            ));
-            return $response
-            ->withHeader('Content-Type', 'application/json');
-        });
+    $app->get("/auth/login", [AuthController::class, 'getLogin']);
+    $app->post("/auth/login", [AuthController::class, 'postLogin']);
+    $app->get("/auth/logout", [AuthController::class, 'logout']);
+    $app->get("/auth/register", [AuthController::class, 'getRegister']);
+    $app->post("/auth/register", [AuthController::class, 'postRegister']);
+
+    $app->get("/oauth/authorize", [OAuthController::class, 'clientAuthorize']);
+    $app->post("/oauth/authorize", [OAuthController::class, 'userAuthorizeGrant']);
+    $app->post("/oauth/token", [OAuthController::class, 'accesTokenGrant']);
+    $app->post("/oauth/tokeninfo", [OAuthController::class, 'getTokenInfo']);
     
-        $app->get("/users", [UserController::class, 'get']);
-        $app->get("/users/{id}", [UserController::class, 'view']); // ->add(EnsureAuthenticatedMiddleware::class);
-        $app->post("/users", [UserController::class, 'add']);
-        $app->put("/users/{id}", [UserController::class, 'update'])->add(EnsureAuthenticatedMiddleware::class);
-        $app->delete("/users/{id}", [UserController::class, 'remove'])->add(EnsureAuthenticatedMiddleware::class);
-        // User Auth
-        $app->post("/users/login", [UserController::class, 'login']);
+    $app->get("/oauth/error", function(Request $request, Response $response): Response {
+        return Responder::view("autherror.twig.html");
+    });
 
-    }
-    )->add(EnsureRegisteredClientMiddleware::class);
+    $app->get("/profile", [PagesController::class, 'getUserProfile'])->add(EnsureAuthenticatedUserMiddleware::class);
+    $app->post("/profile", [PagesController::class, 'postUserProfile'])->add(EnsureAuthenticatedUserMiddleware::class);
+    $app->get("/profile/settings", [PagesController::class, 'getUserProfileSettings'])->add(EnsureAuthenticatedUserMiddleware::class);
+    $app->get("/oauth/revokeaccess/{client_id}", [PagesController::class, 'userRevokeAppAccess']);
+    // ->add(EnsureAuthenticatedUserMiddleware::class);
 
-    //Client Auth
-    $app->post("/auth/client",  [ClientAuthController::class, 'credentials']);
+    //User fetch Api 
+    $app->get("/api/user/{user_id}", [APIController::class, 'fetchUserData'])->add(EnsureAuthenticatedClientMiddleware::class);
 
+     //Developer Console
+    $app->get("/developer", [DeveloperController::class, 'developerHome']);
+    $app->get("/developer/auth/login", [DeveloperController::class, 'developerGetLogin']);
+    $app->post("/developer/auth/login", [DeveloperController::class, 'developerPostLogin']);
+    $app->get("/developer/auth/logout", [DeveloperController::class, 'developerLogout']);
+    $app->get("/developer/auth/register", [DeveloperController::class, 'developerGetRegister']);
+    $app->post("/developer/auth/register", [DeveloperController::class, 'developerPostRegister']);
+    $app->get("/developer/app/create", [DeveloperController::class, 'developerGetCreateApp']);
+    $app->post("/developer/app/create", [DeveloperController::class, 'developerPostCreateApp']);
+    $app->get("/developer/app/view", [DeveloperController::class, 'developerSingleApp']);
+    $app->post("/developer/app/newcredentials", [DeveloperController::class, 'developerAppNewCredentials']);
 };

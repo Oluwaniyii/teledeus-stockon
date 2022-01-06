@@ -6,13 +6,13 @@ namespace App\Lib;
 
 class Validator {
    private static $status ;
-   private static $errorMessage = [];
+   private static $errorMessages = [];
    private static $isValidated;
 
    public static function validate( array $requestInput, array $schemas) {
 
         self::$isValidated = true;
-        self::$errorMessage = [];
+        self::$errorMessages = [];
 
        foreach($schemas as $inputkey =>  $inputSchema) {
            $inputValue = $requestInput[$inputkey] ;
@@ -60,6 +60,8 @@ class Validator {
                    $errorOutcome = true;
                }
                break;
+
+                break;
        }
 
        return $errorOutcome ;
@@ -67,7 +69,7 @@ class Validator {
 
 
     private static function addError($errorMessage) {
-       self::$errorMessage[] = $errorMessage;
+       self::$errorMessages[] = $errorMessage;
        self::$isValidated = false;
     }
 
@@ -75,7 +77,8 @@ class Validator {
         return self::$isValidated;
     } 
 
-   public static function errorrs() {
-       return self::$errorMessage;
+ 
+    public static function errors() {
+       return self::$errorMessages;
    } 
 }
