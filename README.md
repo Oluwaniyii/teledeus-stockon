@@ -38,8 +38,6 @@ Be aware that only server side apps oauth are supported for now
 
 ### App Credentials
 
-<br>
-
 After creating your server side app, you get a **client id** and a **client secret**.
 You can view this by clicking created app in your developer dashborad. Use the show credential button to copy your client credentials..
 <br>
@@ -60,9 +58,6 @@ Authorization Basic bas_64_string(<client_id>:<client_secret>)
 <br>
 
 ### User Authorization: Authorization code grant
-
-<br>
-<br>
 
 The authorization code is a temporary code that the you will use in exchange for an access token learn more at [oauth.com](https://www.oauth.com/oauth2-servers/server-side-apps/authorization-code/);
 
@@ -138,8 +133,6 @@ Otherwise, the user will be redirect back to your app but with an error and erro
 
 ### Obtaining Acess Token 
 
-<br>
-
 Finally the app uses the authorization code to get an access token by making a HTTPS POST request to the token endpoint
 
 The auth server uses long term token so it wont issue a refresh token. The token can be used over and overfor a maximum of 30 days before it expires
@@ -197,7 +190,7 @@ If anything goes wrong in the request the server returns an error and a good des
 
 **Error flags**
 
-The description are exhibited just to know what to expect
+The flags descriptions are exhibited just to know what to expect
 
  **INVALID_REQUEST_ERROR :** "invalid or missing request parameters"
 <br>
@@ -218,8 +211,6 @@ The description are exhibited just to know what to expect
 <br>
 
 ### Pulling User data
-
-<br>
 
 After obtaining an access token, you can then use the access token to pull out authorised user detail. An attempt to pull out any user other than the specific user who granted access will fail
 Its important you store the token in a Bearer authorization header like below
@@ -288,8 +279,6 @@ Authorization: Bearer TKNN61d6bf016d2eaIrM1VaIuN3quneKQh3Z4jl8WQ
 
  ### Token info Request 
 
-<br>
-
  The token info endpoint accepts a post request with **token** parameter and client crdentials
 <br>
  You can choose to send client credentails using the basic auth header or send it as a post data
@@ -337,8 +326,6 @@ either the **is_expired** or *revoked* will be true if the valid is false
 <br>
 
  ### New Client Credentials 
-
-<br>
 
 If your client credentials has been exposed or feel like your client credentails is no longer secure, you can request for a new credentials, but this will cost your app to request authorization again.
 
