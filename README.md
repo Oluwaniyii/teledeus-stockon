@@ -231,9 +231,9 @@ Authorization: Bearer TKNN61d6bf016d2eaIrM1VaIuN3quneKQh3Z4jl8WQ
     "status": "Success",
     "data": {
         "unique_id": "uid61cc1d156bd6f",
-        "username": "Ayodeley",
-        "email": "ayodeleyniyii@gmail.com",
-        "phone": "09074237582",
+        "username": "John",
+        "email": "john@gmail.com",
+        "phone": "111-222-3333",
         "address": {
             "building": "",
             "city": "iyana-ipaja",
