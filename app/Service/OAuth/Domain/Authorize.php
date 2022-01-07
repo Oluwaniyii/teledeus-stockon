@@ -20,7 +20,6 @@ class Authorize {
     //Onsite errors
     protected const INVALID_CLIENT_ERROR = "INVALID_CLIENT";
     protected const INVALID_CLIENT_URL_ERROR = "INVALID_CLIENT_URL";
-    // protected const INVALID_CLIENT_RESPONSE_ERROR = "INVALID_CLIENT_RESPONSE";
     protected const SOMETHING_WENT_WRONG_ERROR = "SOMETHING_WENT_WRONG";
 
     //Api errors

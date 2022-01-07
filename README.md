@@ -193,7 +193,27 @@ any wrong value will return an "invalid_grant", error response
 }
 
 ```
-If anything goes wrong in the request the server returns an *invalid_grant* error
+If anything goes wrong in the request the server returns an error and a good description of the error
+
+**Error flags**
+
+The description are exhibited just to know what to expect
+
+ **INVALID_REQUEST_ERROR :** "invalid or missing request parameters"
+<br>
+ **INVALID_CLIENT_ERROR :** "invalid or missing client credentials"
+<br>
+ **INVALID_AUTH_CODE_ERROR :** "code is invalid";
+<br>
+ **WRONG_CLIENT_ERROR :** "client is not the authorised owner of code"
+<br>
+ **INVALID_URL_GRANT_ERROR :** "provided url does not match app url";
+<br>
+ **EXPIRED_CODE_ERROR :** "code is expired"
+<br>
+ **UNAUTHORIZED_CLIENT_ERROR :** "client is not to use specified grant type";
+<br>
+ **SERVER_ERROR :** something went wrong on our end"
 
 <br>
 

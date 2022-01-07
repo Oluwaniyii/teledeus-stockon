@@ -22,15 +22,15 @@ class AccesTokenGrant{
     private $requestObject;
     private $tokenExpiry = (60 * 60 * 24 *30); //One month Long lifetime token
 
-    protected const INVALID_REQUEST_ERROR = ['error'=>"invalid_request", "description" => ""];
+    protected const INVALID_REQUEST_ERROR = ['error'=>"invalid_client", "description" => "invalid or missing request parameters"];
     protected const INVALID_CLIENT_ERROR = ['error'=>"invalid_client", "description" => "invalid or missing client credentials"];
-    protected const INVALID_GRANT_ERROR = ['error'=>"invalid_grant", "description" => "code is invalid"];
-    protected const INVALID_URL_GRANT_ERROR = ['error'=>"invalid_grant", "description" => "provided url does not match auth url "];
-    protected const EXPIRED_GRANT_ERROR = ['error'=>"invalid_grant", "description" => "code is expired"];
-    protected const UNAUTHORIZED_CLIENT_ERROR = ['error'=>"unauthorized_client", "client is not to use specified grant type" => ""];
-    protected const UNSUPPORTED_GRANT_ERROR = ['error'=>"unauthorized_client", "client is not to use specified grant type" => ""];
+    protected const INVALID_AUTH_CODE_ERROR = ['error'=>"invalid_grant", "description" => "code is invalid"];
+    protected const WRONG_CLIENT_ERROR = ['error'=>"invalid_client", "description" => "client is not the authorised owner of code"];
+    protected const INVALID_URL_GRANT_ERROR = ['error'=>"invalid_grant", "description" => "provided url does not match app url "];
+    protected const EXPIRED_CODE_ERROR = ['error'=>"invalid_grant", "description" => "code is expired"];
+    protected const UNAUTHORIZED_CLIENT_ERROR = ['error'=>"unauthorized_client", "description"=>"client is not to use specified grant type"];
+    protected const UNSUPPORTED_GRANT_ERROR = ['error'=>"unauthorized_client",  "description"=>"grant type is not supported by the server"];
     protected const SOMETHING_WENT_ERROR = ['error'=>"server_error", "something went wrong on our end" => ""];
-    // protected const INVALID_AUTH_CODE_ERROR = ['error'=>"invalid_grant", "description" => "provided url does not match auth url "];
 
 
     public function __construct(){
@@ -62,7 +62,7 @@ class AccesTokenGrant{
       $codeData = $this->oauthRepository->getTokenCode($code);
 
       if(empty($codeData) ){
-        return $this->callApiResponse(self::INVALID_GRANT_ERROR, 400);
+        return $this->callApiResponse(self::INVALID_AUTH_CODE_ERROR, 400);
       }
 
        $codeUniqueId = $codeData["unique_id"];
