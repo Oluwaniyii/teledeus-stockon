@@ -12,7 +12,11 @@ class AppRepository
     private $data;
 
     public function __construct() {
-        $this->db = (new Database)->setDB(__DIR__ . '/../../../../config/db2.php');
+        $this->db = (new Database)->setDB();
+
+        if(!$this->checkTable())
+            $this->createTable();
+
     }
 
     public function add($app){
@@ -101,6 +105,34 @@ class AppRepository
     public function remove($id){
         $action = $this->db->delete('apps', $id);
         return !$action->error() ? true : false ;
+    }
+
+    private function checkTable(){
+        $sql =  "SELECT 1
+        FROM apps";
+
+        $res = ($this->db->query($sql))->results();
+        return $res ? true : false;
+    }
+
+    private function createTable(){
+        $sql = "CREATE TABLE `apps` (
+            `id` int(11) NOT NULL,
+            `unique_id` varchar(40) NOT NULL,
+            `account_id` varchar(150) NOT NULL,
+            `client_id` text NOT NULL,
+            `app_type` varchar(30) NOT NULL,
+            `client_secret` text NOT NULL,
+            `app_name` varchar(300) NOT NULL,
+            `app_description` text NOT NULL,
+            `success_redirect_url` varchar(150) NOT NULL,
+            `error_redirect_url` varchar(150) NOT NULL,
+            `created` timestamp NOT NULL DEFAULT current_timestamp()
+          ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+        ";
+
+        $res = ($this->db->query($sql))->results();
+        return $res ? true : false;
     }
 
 }

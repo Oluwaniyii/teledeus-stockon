@@ -12,7 +12,11 @@ class OAuthRepository
     private $data;
 
     public function __construct() {
-        $this->db = (new Database)->setDB(__DIR__ . '/../../../../config/dboauth.php');
+        $this->db = (new Database)->setDB();
+
+        if(!$this->checkTable())
+            $this->createTable();
+
     }
 
     public function saveTokenCode($tokenCode){
@@ -143,4 +147,44 @@ class OAuthRepository
         return $result ? true : false;
     }
 
+
+    private function checkTable(){
+        $sql =  "SELECT 1
+        FROM token_code";
+
+        $res = ($this->db->query($sql))->results();
+        return $res ? true : false;
+    }
+
+    private function createTable(){
+        $sql = "CREATE TABLE `access_token` (
+            `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+            `unique_id` varchar(60) NOT NULL,
+            `token_string` varchar(60) NOT NULL,
+            `client_id` varchar(100) NOT NULL,
+            `user_identity` varchar(60) NOT NULL,
+            `issued_at` varchar(60) NOT NULL,
+            `expiration_time` varchar(30) NOT NULL,
+            `is_expired` tinyint(1) NOT NULL DEFAULT 0,
+            `revoked` tinyint(1) NOT NULL DEFAULT 0,
+            `meta` datetime NOT NULL DEFAULT current_timestamp()
+          ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+                    
+                    CREATE TABLE `token_code` (
+            `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+            `unique_id` varchar(100) NOT NULL,
+            `code_string` varchar(60) NOT NULL,
+            `client_id` varchar(60) NOT NULL,
+            `client_redirect_url` varchar(100) NOT NULL,
+            `user_identity` varchar(100) NOT NULL,
+            `issued_at` varchar(60) NOT NULL,
+            `expiration_time` varchar(30) NOT NULL,
+            `is_expired` tinyint(1) NOT NULL DEFAULT 0,
+            `meta` datetime NOT NULL DEFAULT current_timestamp()
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+                    ";
+
+        $res = ($this->db->query($sql))->results();
+        return $res ? true : false;
+    }
 }

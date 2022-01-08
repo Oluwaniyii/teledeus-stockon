@@ -30,11 +30,16 @@ class GetUserProfileSettings {
         $this->repository = new UserRepository();
         $this->oauthRepository = new OAuthRepository();
         $this->appRepository = new AppRepository();
+        $this->referer = $_SERVER['REQUEST_URI'];
+
         
     }
 
     public function __invoke(Request $request, Response $response): Response {
         // Requester::setRequestObject($request);
+        if(!$this->auth->isUserLoggedIn())
+            return Responder::redirect("/auth/login?referer=" . urlencode($this->referer));
+
         $userLogin = $this->auth->getLoggedinUser();
         $user = $this->repository->findById($userLogin);
 

@@ -30,6 +30,9 @@ class PostUserProfile {
     public function __invoke(Request $request, Response $response): Response {
         Requester::setRequestObject($request);
 
+        if(!$this->auth->isUserLoggedIn())
+            return Responder::redirect("/auth/login");
+
         $userLogin = $this->auth->getLoggedinUser();
 
         $userFormerData = $this->userRepository->findById($userLogin);

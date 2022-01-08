@@ -19,6 +19,9 @@ class GetLogin {
     private $repository ;
     private $auth_initiator = null;
     private $success_redirect_path;
+    private const AUTH_INITIATOR = "auth_initiator";
+    private const LOGGED_IN_USER = "logged_in_developer";
+    private const SESSION_ERROR_MESSAGE = "login_error_messages";
 
     public function __construct(){
         $this->auth = new Auth();
@@ -32,10 +35,10 @@ class GetLogin {
 
         if(!is_null($referer)){
             $referer = $referer;
-            Session::set("auth_initiator", $referer);
+            Session::set(self::AUTH_INITIATOR, $referer);
         }
 
-        $this->success_redirect_path = Session::check("auth_initiator") ? Session::get('auth_initiator') : "/" ;
+        $this->success_redirect_path = Session::check(self::AUTH_INITIATOR) ? Session::get('auth_initiator') : "/" ;
 
 
         // Check if user session is available'
@@ -52,10 +55,10 @@ class GetLogin {
 
         // if auth cookie login attempts fail, then display login form 
         $errorMessage = ""; 
-        if(Session::check("login_error_messages")) {
-            $errorMessage = (Session::get("login_error_messages"))[0];
+        if(Session::check(self::SESSION_ERROR_MESSAGE)) {
+            $errorMessage = (Session::get(self::SESSION_ERROR_MESSAGE))[0];
 
-            Session::unset("login_error_messages");
+            Session::unset(self::SESSION_ERROR_MESSAGE);
         }
 
         return Responder::view("login.twig.html", ["error_message"=>$errorMessage]);

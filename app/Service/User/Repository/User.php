@@ -9,7 +9,10 @@ class User
     private $data;
 
     public function __construct() {
-         $this->db = (new Database)->setDB();
+        $this->db = (new Database)->setDB();
+
+        if(!$this->checkTable())
+            $this->createTable();
     }
 
     public function findAll(){
@@ -152,5 +155,34 @@ class User
                   "joined" => "$joined"
                 ];
     }
+
+    private function checkTable(){
+        $sql =  "SELECT 1
+        FROM users";
+  
+        $res = ($this->db->query($sql))->results();
+        return $res ? true : false;
+    }
+  
+    private function createTable(){
+        $sql = "CREATE TABLE `users` (
+          `id` int(11) NOT NULL,
+          `unique_id` varchar(100) NOT NULL,
+          `username` varchar(30) NOT NULL,
+          `email` varchar(100) NOT NULL,
+          `phone` varchar(20) NOT NULL,
+          `password` text NOT NULL,
+          `address_building` varchar(255) DEFAULT NULL,
+          `address_city` varchar(255) DEFAULT NULL,
+          `address_state` varchar(255) DEFAULT NULL,
+          `address_zipcode` varchar(20) DEFAULT NULL,
+          `joined` datetime NOT NULL DEFAULT current_timestamp()
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+        ";
+  
+        $res = ($this->db->query($sql))->results();
+        return $res ? true : false;
+    }
+  
 
 }

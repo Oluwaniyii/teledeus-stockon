@@ -13,6 +13,7 @@ use App\Service\_Developer\App\Repository\AppRepository;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use App\Http\Requester;
 use Psr\Http\Message\ResponseInterface as Response;
+use Slim\Psr7\Response as Responsepr;
 use App\Http\Responder;
 
 
@@ -32,6 +33,11 @@ class PostCreateApp {
     }
 
     public function __invoke(Request $request, Response $response): Response {
+
+        if(!$this->auth->isUserLoggedIn()){
+            return Responder::redirect("/developer");
+        }
+
         Requester::setRequestObject($request);
 
         $requiredData = [  "app_name", "app_description", "app_type", "success_redirect_url", "error_redirect_url"];
@@ -63,8 +69,6 @@ class PostCreateApp {
             return Responder::redirect($this->error_redirect_path);
         }
 
-       
-
         //Data is Valid 
         $app = [];
         $app["app_name"] = $app_name;
@@ -80,8 +84,13 @@ class PostCreateApp {
             return Responder::redirect($this->error_redirect_path);
         }
         else {
+            return Responder::redirect("/developer");
+            exit;
+
             return Responder::redirect($this->success_redirect_path);
         }
+
+            return Responder::redirect($this->success_redirect_path);
 
     }
 

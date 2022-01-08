@@ -19,7 +19,7 @@ class PostLogin {
     private $repository ;
     private $auth;
     private $success_redirect_path;
-    private $error_redirect_path = "developer/auth/login";
+    private $error_redirect_path = "/auth/login";
     private $loginErrorMessages=[];
    
     public function __construct(){

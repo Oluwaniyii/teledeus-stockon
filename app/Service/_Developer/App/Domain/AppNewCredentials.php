@@ -31,8 +31,12 @@ class AppNewCredentials {
 
     public function __invoke(Request $request, Response $response): Response {
              // Protected by middleware
-            Requester::setRequestObject($request);
+             Requester::setRequestObject($request);
             
+             if(!$this->auth->isUserLoggedIn()){
+                return Responder::redirect("/developer");
+            }
+
             $app_id = (Requester::getPostData())['app_id'];
             $userId = $this->auth->getLoggedinUser();
 

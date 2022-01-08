@@ -170,71 +170,86 @@
 
     <section id="myapps">
         <div class="contain">
-            <h3 class="heading">{{app['app_name']}}</h3>
+            {% if app %}
+                <h3 class="heading">{{app['app_name']}}</h3>
 
-            {% if credentials %}
-            <a href="/developer/app/view?app_id=61d4a82f02278" id="new-app">Hide
-                Credentials</a>
+                {% if credentials %}
+                <a href="/developer/app/view?app_id=61d4a82f02278" id="new-app">Hide
+                    Credentials</a>
 
-            <div class="credentials" style="text-align: left;">
-                <div><span style="font-weight: bold; color: #333;">
-                        client ID:
-                    </span>
-                    <span>{{app['client_id']}}</span>
+                <div class="credentials" style="text-align: left;">
+                    <div><span style="font-weight: bold; color: #333;">
+                            client ID:
+                        </span>
+                        <span>{{app['client_id']}}</span>
+                    </div>
+
+                    <div> <span style="font-weight: bold; color: #333;">
+                            client Secret:
+                        </span>
+                        <span>{{app['client_secret']}}</span>
+                    </div>
+                </div>
+                {% else %}
+                <a href="/developer/app/view?app_id={{app['unique_id']}}&credentials=true" id="new-app">Show
+                    Credentials</a>
+
+
+                <div class="credentials">
+                    <div><span style="font-weight: bold; color: #333;">
+                            client ID:
+                        </span>
+                        <span> wcygnfoxxxxxxxxxxxxxgts</span>
+                    </div>
+
+                    <div> <span style="font-weight: bold; color: #333;">
+                            client Secret:
+                        </span>
+                        <span> wcygnfoxxxxxxxxxxxxxgts</span>
+                    </div>
+                </div>
+                {% endif %}
+
+                <div class="app">
+                    <h2 class="apptitle">{{app['app_name']}}</h2>
+                    <div><small>{{app['created']}}</small></div>
+                    <br>
+                    <div>
+                        {{app['app_description']}}
+                    </div>
+                    <br>
                 </div>
 
-                <div> <span style="font-weight: bold; color: #333;">
-                        client Secret:
-                    </span>
-                    <span>{{app['client_secret']}}</span>
-                </div>
-            </div>
-            {% else %}
-            <a href="/developer/app/view?app_id=61d4a82f02278&credentials=true" id="new-app">Show
-                Credentials</a>
-
-
-            <div class="credentials">
-                <div><span style="font-weight: bold; color: #333;">
-                        client ID:
-                    </span>
-                    <span> wcygnfoxxxxxxxxxxxxxgts</span>
-                </div>
-
-                <div> <span style="font-weight: bold; color: #333;">
-                        client Secret:
-                    </span>
-                    <span> wcygnfoxxxxxxxxxxxxxgts</span>
-                </div>
-            </div>
-            {% endif %}
-
-            <div class="app">
-                <h2 class="apptitle">{{app['app_name']}}</h2>
-                <div><small>{{app['created']}}</small></div>
                 <br>
-                <div>
-                    {{app['app_description']}}
-                </div>
                 <br>
+                <h3 class="heading">App Settings</h3>
+
+                <!-- New Credentials -->
+                <form action="/developer/app/newcredentials" method="POST">
+                    <input type="hidden" name="app_id" value="{{app['unique_id']}}">
+                    <button id="new-app" style="cursor: pointer;">
+                        Request new credentials
+                    </button>
+                </form>
+
+                <br>
+                <br>
+
             </div>
+        {% else %}
 
-            <br>
-            <br>
-            <h3 class="heading">App Settings</h3>
-
-            <!-- New Credentials -->
-            <form action="/developer/app/newcredentials" method="POST">
-                <input type="hidden" name="app_id" value="{{app['unique_id']}}">
-                <button id="new-app" style="cursor: pointer;">
-                    Request new credentials
-                </button>
-            </form>
-
-            <br>
-            <br>
-
+        <h3 class="heading"> 
+            App Not Found
+        </h3>
+        <br>
+        <br>
+        <div>
+            <a href="/developer" id="new-ap">Back to dashboard</a>
         </div>
+       
+
+        {% endif %}
+
     </section>
 
 </body>

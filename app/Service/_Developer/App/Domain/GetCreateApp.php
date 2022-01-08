@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Service\_Developer\App\Domain ;
 
-
+use App\Service\_Developer\Auth\DeveloperAuth ;
 use App\Http\Session;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use App\Http\Requester;
@@ -22,9 +22,13 @@ class GetCreateApp {
 
     public function __construct(){
         Session::init();
+        $this->auth = new DeveloperAuth;
     }
 
     public function __invoke(Request $request, Response $response): Response {
+        if(!$this->auth->isUserLoggedIn()){
+            return Responder::redirect("/developer");
+        }
         // if auth cookie login attempts fail, then display login form 
         $errorMessage = ""; 
         if(Session::check(self::SESSION_ERROR_MESSAGE)) {

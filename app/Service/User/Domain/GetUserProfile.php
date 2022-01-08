@@ -18,16 +18,23 @@ class GetUserProfile {
     // submit referer alongside post data
     // Return login form
     private $repository ;
+    private $referer ;
     private $auth;
     private $homepage = "/";
 
     public function __construct(){
         $this->auth = new Auth();
         $this->repository = new UserRepository();
+        $this->referer = $_SERVER['REQUEST_URI'];
+
     }
 
     public function __invoke(Request $request, Response $response): Response {
         Requester::setRequestObject($request);
+
+        if(!$this->auth->isUserLoggedIn())
+        return Responder::redirect("/auth/login?referer=" . urlencode($this->referer));
+
         $userLogin = $this->auth->getLoggedinUser();
         $user = $this->repository->findById($userLogin);
 

@@ -22,16 +22,20 @@ class UserRevokeAccess {
     private $auth;
     private $oauth;
     private $homepage = "/";
+    private $referer ;
 
     public function __construct(){
         $this->auth = new Auth();
         $this->oauth = new OAuth();
         $this->repository = new UserRepository();
-        
+        $this->referer = $_SERVER['REQUEST_URI'];
     }
 
     public function __invoke(Request $request, Response $response, $client_id): Response {
-        // $client_id;
+        
+        if(!$this->auth->isUserLoggedIn())
+        return Responder::redirect("/auth/login?referer=" . urlencode($this->referer));
+
         $userLogin = $this->auth->getLoggedinUser();
 
         $this->oauth->revokeAppAccess($client_id, $userLogin);

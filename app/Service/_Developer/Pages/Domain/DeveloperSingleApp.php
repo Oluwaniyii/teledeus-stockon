@@ -27,6 +27,9 @@ class DeveloperSingleApp {
     public function __invoke(Request $request, Response $response): Response {
              // Protected by middleware
             Requester::setRequestObject($request);
+            
+            if(!$this->auth->isUserLoggedIn())
+                return Responder::redirect("/developer");
 
             $appId = Requester::getQueryParam("app_id");
             $credentials = Requester::getQueryParam("credentials");
