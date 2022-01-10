@@ -212,7 +212,9 @@
 
                 <div class="app">
                     <h2 class="apptitle">{{app['app_name']}}</h2>
-                    <div><small>{{app['created']}}</small></div>
+                    <br>
+                    <div><small>App ID: {{app['unique_id']}}</small></div>
+                    <div><small>created: {{app['created']}}</small></div>
                     <br>
                     <div>
                         {{app['app_description']}}
@@ -234,6 +236,28 @@
 
                 <br>
                 <br>
+
+                <h3 class="heading">Connected Users</h3>
+
+                {% if connectedUsers %}
+                     <div>
+                        {% for connectedUser in connectedUsers %}
+                        <div>
+                            <span>Username: {{connectedUser['Username']}}</span>
+                            <span>User ID: {{connectedUser['unique_id']}}</span>
+                        </div>
+                        {% endfor %}
+                     </div>
+                {% else %}
+                    <div>
+                      <h3>
+                          This App has not Connected with any user yet
+                      </h3>
+                    </div>
+                {% endif %}
+
+
+
 
             </div>
         {% else %}

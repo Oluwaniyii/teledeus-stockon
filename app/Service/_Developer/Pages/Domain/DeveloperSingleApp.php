@@ -15,6 +15,7 @@ use App\Http\Responder;
 // This class should be extending Auth class!
 class DeveloperSingleApp {
     private $repository ;
+    private $userRepository ;
     private $appRepository ;
 
     public function __construct(){
@@ -39,6 +40,7 @@ class DeveloperSingleApp {
             $user = $this->auth->getLoggedinUserData();
             //Fetch User apps
             $app = [];
+            $connectedUsers = [];
 
             if($credentials && ($credentials == "true")){
                 $app = $this->appRepository->findAppById($appId, false);
@@ -46,9 +48,15 @@ class DeveloperSingleApp {
             else {
                 $app = $this->appRepository->findAppById($appId, true);
             }
-            // var_dump($app);
 
-            return Responder::view("console/singleapp.twig.html", ["user"=>$user,"app"=>$app, "credentials"=>$credentials]);
+            $connectedUsers = $this->appRepository->findUsersConnectedToApp($appId);
+
+            return Responder::view("console/singleapp.twig.html", 
+            ["user"=>$user,
+               "app"=>$app, 
+               "connectedUsers"=>$connectedUsers, 
+               "credentials"=>$credentials
+            ]);
     }
 
 }

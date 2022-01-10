@@ -3,19 +3,20 @@
 declare(strict_types=1);
 
 use DI\Container;
+use Dotenv\Dotenv;
 use DI\Bridge\Slim\Bridge as SlimAppFactory;
-use App\Middleware\TestMiddleware;
-use App\Middleware\EnsureRegisteredClientMiddleware;
 
 require __DIR__ . '/../vendor/autoload.php';
 
 $container = new Container;
+$dotenv = Dotenv::createImmutable(__DIR__);
+$dotenv->safeLoad();
 
 $app = SlimAppFactory::create($container);
 
 // Global Middlewares
 $app->addBodyParsingMiddleware();
-$app->addErrorMiddleware(true,true,true);
+$app->addErrorMiddleware(false,true,true);
 
 // Routes
 (require __DIR__ . '/../app/routes.php')($app);

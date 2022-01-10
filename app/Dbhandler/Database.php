@@ -22,7 +22,7 @@ class Database
             $dbname = $config['dbname'];
             $username = $config['user'];
             $password = $config['password'];
-            $dsn = "mysql:hostname=$host;dbname=$dbname;";
+            $dsn = "mysql:host=$host;dbname=$dbname;";
             $options = [
                 PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
                 PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC

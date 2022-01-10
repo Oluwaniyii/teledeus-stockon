@@ -53,12 +53,12 @@ class PostCreateApp {
         $this->createErrorMessages[]="App name, App description, App type, and success redirect url are compulsory";
 
         //makesure urls are in url format 
-        if(!parse_url($success_redirect_url))
-            $this->createErrorMessages[]="Success redirect must be a valid url format";
+        if(!$this->urlValidate($success_redirect_url))
+            $this->createErrorMessages[]="Success redirect must be a valid and active url";
 
         if(!empty($error_redirect_url)){
-            if(!parse_url($error_redirect_url))
-                 $this->createErrorMessages[]="Success redirect must be a valid url format";
+            if(!$this->urlValidate($error_redirect_url))
+                 $this->createErrorMessages[]="Error redirect must be a valid and active url";
         }else{
             $error_redirect_url = $success_redirect_url;
         }
@@ -104,5 +104,52 @@ class PostCreateApp {
 
         return $this->repository->add($appData);
     } 
+
+    private function urlValidate($url){
+        if(!$url || !is_string($url)){
+            return false;
+        }
+
+        if( ! preg_match('/^http(s)?:\/\/[a-z0-9-]+(\.[a-z0-9-]+)*(:[0-9]+)?(\/.*)?$/i', $url) ){
+            return false;
+        }
+
+        if($this->getHttpResponseCode_using_curl($url) != 200){
+            return false;
+        }
+        // all good!
+        return true;
+        
+    }
+
+    private function getHttpResponseCode_using_curl($url, $followredirects = true){
+        if(! $url || ! is_string($url)){
+            return false;
+        }
+        $ch = @curl_init($url);
+        if($ch === false){
+            return false;
+        }
+        @curl_setopt($ch, CURLOPT_HEADER         ,true);   
+        @curl_setopt($ch, CURLOPT_NOBODY         ,true);   
+        @curl_setopt($ch, CURLOPT_RETURNTRANSFER ,true);
+
+        if($followredirects){
+            @curl_setopt($ch, CURLOPT_FOLLOWLOCATION ,true);
+            @curl_setopt($ch, CURLOPT_MAXREDIRS      ,10);  
+        }else{
+            @curl_setopt($ch, CURLOPT_FOLLOWLOCATION ,false);
+        }
+
+        @curl_exec($ch);
+        if(@curl_errno($ch)){   // should be 0
+            @curl_close($ch);
+            return false;
+        }
+        $code = @curl_getinfo($ch, CURLINFO_HTTP_CODE); // note: php.net documentation shows this returns a string, but really it returns an int
+        @curl_close($ch);
+        return $code;
+    }
+    
 
 }

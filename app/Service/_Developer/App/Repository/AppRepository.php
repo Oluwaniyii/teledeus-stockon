@@ -97,6 +97,20 @@ class AppRepository
         return  empty($result) ? [] : $result[0];
     }
 
+
+    public function findUsersConnectedToApp($clientID){
+        $sql =  "SELECT DISTINCT user_identity
+                    FROM access_token
+                    WHERE client_id = :client_id
+                    AND is_expired=0;";
+
+        $params["client_id"] = $clientID;
+
+        $result = ($this->db->query($sql, $params))->results();
+        return  empty($result) ? [] : $result[0];
+    }
+
+
     public function update($appID, $data){
 
         $validData = [];

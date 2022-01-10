@@ -25,7 +25,7 @@ class PagesController
           $userLogin = $auth->getLoggedinUser();
           $user = $userRepository->findById($userLogin);
           
-            return Responder::view("home.twig.html", ["username" => $user['username'], "uid" => $user['unique_id'] ]);
+          return Responder::view("home.twig.html", ["username" => $user['username'], "uid" => $user['unique_id'] ]);
          }
 
          return Responder::redirect("/auth/login");
