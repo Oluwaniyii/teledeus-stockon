@@ -6,10 +6,10 @@ A private user authorization service with oauth2.0 integration.
 
 To use the oauth server, you need have a developer account first
 
-[ ![Create application form](./_readme/newapp.png) ](https://tldstockon.herokuapp.com/developer)
+[ ![Create application form](./_readme/newapp.png) ](https://tldstokon.herokuapp.com/developer)
 
 
-**1.** head on to [**tldstockon developer console**](https://tldstockon.herokuapp.com/developer)
+**1.** head on to [**tldstockon developer console**](https://tldstokon.herokuapp.com/developer)
 
 **2.** login into your developer account
            after a successful login , you will be taken to your dashboard where you can create an application
@@ -18,7 +18,7 @@ To use the oauth server, you need have a developer account first
 
 #### Application Form
 
-[ ![Create application form](./_readme/appcreate.png) ](https://tldstockon.herokuapp.com/developer/app/create)
+[ ![Create application form](./_readme/appcreate.png) ](https://tldstokon.herokuapp.com/developer/app/create)
 
 The application form requires the
 
@@ -159,7 +159,7 @@ Content-Type: application/json
 
 **redirect_url** : this must be the same with the success redirec url provided when creating your app
 
-**client_id** : your app's client id, you can find thin in your developer dashboard [developer dashboard](https://tldstockon.herokuapp.com/developer)
+**client_id** : your app's client id, you can find thin in your developer dashboard [developer dashboard](https://tldstokon.herokuapp.com/developer)
 
 **client_secret** : your app's client secret
 
