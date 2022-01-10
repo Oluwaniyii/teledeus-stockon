@@ -10,8 +10,8 @@ class JWT
 {
     private static $secretKey = "Teledeus_Jwt_Secret_key";
     private static $hash = 'HS512' ;
-    private static $iss = 'http://localhost' ;
-    private static $aud = 'http://localhost';
+    private static $iss = 'https://tldstokon.herokuapp.com/' ;
+    private static $aud = 'https://tldstokon.herokuapp.com/';
     private static $iat ;
     private static $nbf ;
     private static $exp ;
