@@ -321,7 +321,7 @@ The **username** points to the username of authorised user
 <br>
 The **valid** index tells if the token is still valid.
 <br>
-either the **is_expired** or *revoked* will be true if valid is false.
+either the **is_expired** or **revoked** will be true if valid is false.
 <br>
 
  ### New Client Credentials 
