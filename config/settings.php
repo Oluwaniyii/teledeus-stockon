@@ -2,7 +2,7 @@
 
 return [
     'error_details' => [
-        "displayErrorDetails" => true,
+        "displayErrorDetails" => false,
         "logErrorDetails" => true,
         "logErrors" => true,
     ],

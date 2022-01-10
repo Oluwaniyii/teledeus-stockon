@@ -17,11 +17,10 @@ class Database
 
     public function setDB($configPath = null) {
         try {
-            $config = require !is_null($configPath) ? $configPath : __DIR__ . '/../../config/db.php' ;
-            $host = $config['host'];
-            $dbname = $config['dbname'];
-            $username = $config['user'];
-            $password = $config['password'];
+            $host = $_ENV['DB_HOST'];
+            $dbname = $_ENV['DB_NAME'];
+            $username = $_ENV['DB_USER'];
+            $password = $_ENV['DB_PASSWORD'];
             $dsn = "mysql:host=$host;dbname=$dbname;";
             $options = [
                 PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,

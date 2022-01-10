@@ -2,3 +2,4 @@ vendor/
 config/
 features_to_come.txt
 config/
+.env
