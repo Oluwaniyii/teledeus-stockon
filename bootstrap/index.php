@@ -25,5 +25,4 @@ else {
 
 // Routes
 (require __DIR__ . '/../app/routes.php')($app);
-var_dump($_ENV);
 $app->run();
