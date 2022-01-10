@@ -47,7 +47,7 @@ The **client id** is a random 32 string. while the **client secret** is a 64-str
 <br>
 Some request might require you to use both client id as secret for verification.
  You can choose to send client credentails using the basic auth header or send it as a get request parameter or post data.
- when using as a basic header make sure it is in this format &ltclient_id&gt:&ltclient_secret&gt, converted to **base 64 string** 
+ when using as a basic header make sure it is in this format client_id:client_secret, converted to **base 64 string** 
 
 ```Http
 
@@ -74,7 +74,7 @@ The auth server expects the:
 <br>
 **redirect_url** : *(required)* this must be the same with the "success rdirect url" provided while creating your app and must be active. **This should be written in url encoded format**
 <br>
-**scope** : *(required)* the auth server only allows you to pull user details, and doesn't require a scope parameter. Get a break a break you f--king nerd
+**scope** : *(required)* the auth server only allows you to pull user details, and doesn't require a scope parameter.
 <br>
 **state** : *(optional)* the state parameter is used by the client itself for known purpose, on a successful authorization, the auth server will return the exact value as a parameter while redirecting the user. learn more at [oauth.com](https://www.oauth.com/oauth2-servers/server-side-apps/authorization-code/);
 
@@ -157,7 +157,7 @@ Content-Type: application/json
 
 **code** : previously issued authorization code
 
-**redirect_url** : this must be the same with the success redirec url provided when creating your app
+**redirect_url** : this must be the same with the success redirect url provided when creating your app
 
 **client_id** : your app's client id, you can find thin in your developer dashboard [developer dashboard](https://tldstokon.herokuapp.com/developer)
 
@@ -212,8 +212,8 @@ The flags descriptions are exhibited just to know what to expect
 
 ### Pulling User data
 
-After obtaining an access token, you can then use the access token to pull out authorised user detail. An attempt to pull out any user other than the specific user who granted access will fail
-Its important you store the token in a Bearer authorization header like below
+After obtaining an access token, you can then use the access token to pull out authorised user detail. An attempt to pull out any user other than the specific user who granted access will fail.
+It is important you store the token in a Bearer authorization header like below
 
 ***Sample rquest response***
 ```http
@@ -253,7 +253,7 @@ Authorization: Bearer TKNN61d6bf016d2eaIrM1VaIuN3quneKQh3Z4jl8WQ
 
 <br>
 
- Users are allowed to revoke an acces at any time given, when you try to make a request using revoked acces, you get an unauthorized response
+ Users are allowed to revoke an access at any time given, when you try to make a request using revoked access token , you get an unauthorized response
 
 **Request**
 
@@ -279,9 +279,9 @@ Authorization: Bearer TKNN61d6bf016d2eaIrM1VaIuN3quneKQh3Z4jl8WQ
 
  ### Token info Request 
 
- The token info endpoint accepts a post request with **token** parameter and client crdentials
+ The token info endpoint accepts a post request with **token** parameter and client credentials
 <br>
- You can choose to send client credentails using the basic auth header or send it as a post data
+ You can choose to send client credentials using the basic auth header or send it as a post data
 <br>
  The content type must be set to application/json
 
@@ -319,15 +319,14 @@ Content-Length: 64
 
 The **username** points to the username of authorised user 
 <br>
-The **valid** index tesll if the token is still valid
+The **valid** index tells if the token is still valid.
 <br>
-either the **is_expired** or *revoked* will be true if the valid is false 
-
+either the **is_expired** or *revoked* will be true if valid is false.
 <br>
 
  ### New Client Credentials 
 
-If your client credentials has been exposed or feel like your client credentails is no longer secure, you can request for a new credentials, but this will cost your app to request authorization again.
+If your client credentials has been exposed or feel like your credentials are no longer secure, you can request for a new credentials, but this will cost your app to request authorization again.
 
 ##### Requesting new credentials
 
