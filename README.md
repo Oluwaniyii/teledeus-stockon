@@ -321,12 +321,12 @@ The **username** points to the username of authorised user
 <br>
 The **valid** index tells if the token is still valid.
 <br>
-either the **is_expired** or *revoked* will be true if valid is false.
+either the **is_expired** or **revoked** will be true if valid is false.
 <br>
 
  ### New Client Credentials 
 
-If your client credentials has been exposed or feel like your credentials are no longer secure, you can request for a new credentials, but this will cost your app to request authorization again.
+If your client credentials has been exposed or you feel like your credentials are no longer secure, you can request for new credentials, but this will cost your app to request authorization again.
 
 ##### Requesting new credentials
 
