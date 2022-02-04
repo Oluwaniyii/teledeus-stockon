@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\Service\Auth\Auth;
-use Twig\Loader\FilesystemLoader as TwigLoader;
-use Twig\Environment as TwigEnv;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use App\Http\Responder ;
@@ -14,7 +12,7 @@ use App\Service\User\Repository\User;
 
 
 
-class PagesController 
+class UserController 
 {
      public function home(Request $request, Response $response): Response {
          $auth = new Auth();
@@ -44,8 +42,8 @@ class PagesController
       return (new \App\Service\User\Domain\GetUserProfileSettings())($request, $response) ; 
     }
 
-  public function userRevokeAppAccess(Request $request, Response $response, $client_id): Response {
-    return (new \App\Service\User\Domain\UserRevokeAccess())($request, $response, $client_id) ; 
-  }
+    public function userRevokeAppAccess(Request $request, Response $response, $client_id): Response {
+      return (new \App\Service\User\Domain\UserRevokeAccess())($request, $response, $client_id) ; 
+    }
 
 }

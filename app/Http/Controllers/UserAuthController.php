@@ -5,14 +5,12 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\Service\Auth\Auth;
-use Twig\Loader\FilesystemLoader as TwigLoader;
-use Twig\Environment as TwigEnv;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use App\Http\Responder ;
 
 
-class AuthController 
+class UserAuthController 
 {
     public function getLogin(Request $request, Response $response) {
       return (new \App\Service\Auth\Domain\GetLogin())($request, $response) ; 

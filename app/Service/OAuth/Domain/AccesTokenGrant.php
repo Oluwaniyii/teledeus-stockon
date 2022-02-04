@@ -6,7 +6,6 @@ namespace App\Service\OAuth\Domain;
 
 use App\Lib\Input;
 use App\Lib\HexGenerator;
-use App\JWT ;
 use App\Service\OAuth\Repository\OAuthRepository;
 use App\Service\OAuth\Repository\AppRepository;
 use Psr\Http\Message\ServerRequestInterface as Request;

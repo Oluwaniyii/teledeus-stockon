@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Service\OAuth\Domain;
 
 use App\Lib\HexGenerator;
-use App\JWT ;
 use App\Service\Auth\Auth ;
 use App\Http\Session;
 use App\Service\OAuth\Repository\OAuthRepository;
